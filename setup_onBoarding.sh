@@ -5,8 +5,8 @@ if [[ $EUID -ne 0 ]]; then
    	exit 1
 else
 	#Update and Upgrade
-	echo "Updating and Upgrading"
-	apt-get update && sudo apt-get upgrade -y
+	# echo "Updating and Upgrading"
+	# apt-get update && sudo apt-get upgrade -y
 
 	sudo apt-get install dialog
 	cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
@@ -16,11 +16,9 @@ else
 			 3 "NPM" off
 	         4 "Git" off
 			 5 "GitKraken" off
-	         7 "JDK 8" on
-	         8 "Bleachbit" off
-	         9 "Ubuntu Restricted Extras" off
-	         10 "VLC Media Player" off
-	         11 "Unity Tewak Tool" off
+			 6 "Visual Studio Code" off
+			 7 "Android SDK" off
+	         8 "JDK 8" on
 	         12 "Google Chrome" off
 	         13 "Teamiewer" off
 	         14 "Skype" off
@@ -72,25 +70,39 @@ else
 				#Install gitKraken
 				echo "Installing GitKraken"
 				wget -d -c -O ~/Downloads/GitKraken-v5.0.4.deb https://www54.zippyshare.com/d/jncjkiA7/25650/GitKraken-v5.0.4.deb -
-				sudo dpkg -i /home/fulki/Downloads/GitKraken-v5.0.4.deb
+				dpkg -i ~/Downloads/GitKraken-v5.0.4.deb
+				;;
+
+			6)
+				#Install Visual Studio Code
+				echo "Installing Visual Studio Code"
+				wget -d -c -O ~/Downloads/code_1.41.1-1576681836_amd64.deb https://www36.zippyshare.com/d/FHS43cyr/22977/code_1.41.1-1576681836_amd64.deb -
+				dpkg -i ~/Downloads/code_1.41.1-1576681836_amd64.deb
 				;;
 
 			7)
+				#Android SDK
+				echo "Installing Android SDK"
+				apt install android-sdk -y
+				# file on /usr/lib/android-sdk
+				;;
+
+			8)
 				#JDK 8
 				echo "Installing JDK 8"
 				mkdir /usr/lib/jvm
 				wget -d -c -O /usr/lib/jvm/jdk-8u221-linux-x64.tar.gz https://www118.zippyshare.com/d/wDrNrELY/32132/jdk-8u221-linux-x64.tar.gz -
-				tar zxvf jdk-8u221-linux-x64.tar.gz
+				tar zxvf /usr/lib/jvm/jdk-8u221-linux-x64.tar.gz
+				mv jdk1.8.0_221 /usr/lib/jvm/
+				rm -rf /usr/lib/jvm/jdk-8u221-linux-x64.tar.gz
 				;;
-			8)
-				#Bleachbit
-				echo "Installing BleachBit"
-				apt install bleachbit -y
-				;;
+			
 			9)
-				#Ubuntu Restricted Extras
-				echo "Installing Ubuntu Restricted Extras"
-				apt install ubunt-restricted-extras -y
+				#Appium
+				echo "Installing Appium"
+				mkdir ./Documents/AppiumApps
+				wget -d -c -O ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage https://github-production-release-asset-2e65be.s3.amazonaws.com/63558084/d7ad5a00-edb0-11e9-8971-978bd21176d7?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200204%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200204T073631Z&X-Amz-Expires=300&X-Amz-Signature=db59f82fd9820c46139707de6345ce4e6b8911f1fdee35aaf234d2c5374d9d9a&X-Amz-SignedHeaders=host&actor_id=20717497&response-content-disposition=attachment%3B%20filename%3DAppium-linux-1.15.1.AppImage&response-content-type=application%2Foctet-stream -
+				# create to stsrt
 				;;
 			10)
 				#VLC Media Player
