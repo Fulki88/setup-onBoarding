@@ -18,7 +18,8 @@ else
 			 5 "GitKraken" off
 			 6 "Visual Studio Code" off
 			 7 "Android SDK" off
-	         8 "JDK 8" on
+	         8 "JDK 8" off
+			 9 "Appium" on
 	         12 "Google Chrome" off
 	         13 "Teamiewer" off
 	         14 "Skype" off
@@ -104,6 +105,7 @@ else
 				wget -d -c -O ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage https://github-production-release-asset-2e65be.s3.amazonaws.com/63558084/d7ad5a00-edb0-11e9-8971-978bd21176d7?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200204%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200204T073631Z&X-Amz-Expires=300&X-Amz-Signature=db59f82fd9820c46139707de6345ce4e6b8911f1fdee35aaf234d2c5374d9d9a&X-Amz-SignedHeaders=host&actor_id=20717497&response-content-disposition=attachment%3B%20filename%3DAppium-linux-1.15.1.AppImage&response-content-type=application%2Foctet-stream -
 				# create to stsrt
 				;;
+				
 			10)
 				#VLC Media Player
 				echo "Installing VLC Media Player"
