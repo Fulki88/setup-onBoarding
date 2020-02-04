@@ -20,7 +20,7 @@ else
 			 7 "Android SDK" off
 	         8 "JDK 8" off
 			 9 "Appium" on
-	         12 "Google Chrome" off
+	         10 "Google Chrome" on
 	         13 "Teamiewer" off
 	         14 "Skype" off
 	         15 "Paper GTK Theme" off
@@ -46,6 +46,7 @@ else
 				#Install Build Essentials
 				echo "Installing Build Essentials"
 				apt install -y build-essential
+				notify-send 'Build Essentials' 'have already installed!✔'
 				;;
 				
 			2)
@@ -53,18 +54,21 @@ else
 				echo "Installing Nodejs"
 				curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 				apt install -y nodejs
+				notify-send 'Node JS' 'have already installed!✔'
 				;;
 
 			3)	
 				#Install NPM
 				echo "Installing NPM"
 				apt install -y npm
+				notify-send 'NPM' 'have already installed!✔'
 				;;
 
 			4)
 				#Install git
 				echo "Installing Git, please configure git later..."
 				apt install git -y
+				notify-send 'Git' 'have already installed!✔'
 				;;
 			
 			5)
@@ -72,6 +76,7 @@ else
 				echo "Installing GitKraken"
 				wget -d -c -O ~/Downloads/GitKraken-v5.0.4.deb https://www54.zippyshare.com/d/jncjkiA7/25650/GitKraken-v5.0.4.deb -
 				dpkg -i ~/Downloads/GitKraken-v5.0.4.deb
+				notify-send 'GitKraken' 'have already installed!✔'
 				;;
 
 			6)
@@ -79,12 +84,14 @@ else
 				echo "Installing Visual Studio Code"
 				wget -d -c -O ~/Downloads/code_1.41.1-1576681836_amd64.deb https://www36.zippyshare.com/d/FHS43cyr/22977/code_1.41.1-1576681836_amd64.deb -
 				dpkg -i ~/Downloads/code_1.41.1-1576681836_amd64.deb
+				notify-send 'Visual Studio Code' 'have already installed!✔'
 				;;
 
 			7)
 				#Android SDK
 				echo "Installing Android SDK"
 				apt install android-sdk -y
+				notify-send 'Android SDK' 'have already installed!✔'
 				# file on /usr/lib/android-sdk
 				;;
 
@@ -96,6 +103,7 @@ else
 				tar zxvf /usr/lib/jvm/jdk-8u221-linux-x64.tar.gz
 				mv jdk1.8.0_221 /usr/lib/jvm/
 				rm -rf /usr/lib/jvm/jdk-8u221-linux-x64.tar.gz
+				notify-send 'JDK 8' 'have already installed!✔'
 				;;
 			
 			9)
@@ -103,21 +111,13 @@ else
 				echo "Installing Appium"
 				mkdir ./Documents/AppiumApps
 				wget -d -c -O ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage https://www106.zippyshare.com/d/FXY8w9qY/4713/Appium-linux-1.15.1.AppImage -
+				chmod +x ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage
+				sudo ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage
+				notify-send 'Appium' 'have already installed!✔'
 				# create to stsrt
 				;;
 
 			10)
-				#VLC Media Player
-				echo "Installing VLC Media Player"
-				apt install vlc -y
-				;;
-			11)
-				#Unity tweak tool
-				echo "Installing Unity Tweak Tool"
-				apt install unity-tweak-tool -y
-				;;
-			12)
-
 				#Chrome
 				echo "Installing Google Chrome"
 				wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
