@@ -117,6 +117,8 @@ else
 				sudo systemctl start docker
 				sudo systemctl enable docker
 				notify-send 'Docker' 'have already installed!✔'
+				;;
+				
 	    esac
 	done
 fi
