@@ -21,7 +21,7 @@ else
 	        #  8 "JDK 8" off
 			#  9 "Appium" on
 	         10 "Google Chrome" on
-			 11 "Docker" on
+			 11 "Docker" on)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
 		for choice in $choices
@@ -33,7 +33,6 @@ else
 				apt install -y build-essential
 				notify-send 'Build Essentials' 'have already installed!✔'
 				;;
-				
 			2)
 				#Install Nodejs
 				echo "Installing Nodejs"
@@ -41,21 +40,18 @@ else
 				apt install -y nodejs
 				notify-send 'Node JS' 'have already installed!✔'
 				;;
-
 			3)	
 				#Install NPM
 				echo "Installing NPM"
 				apt install -y npm
 				notify-send 'NPM' 'have already installed!✔'
 				;;
-
 			4)
 				#Install git
 				echo "Installing Git, please configure git later..."
 				apt install git -y
 				notify-send 'Git' 'have already installed!✔'
 				;;
-			
 			# 5)
 			# 	#Install gitKraken
 			# 	echo "Installing GitKraken"
@@ -63,14 +59,12 @@ else
 			# 	dpkg -i ~/Downloads/GitKraken-v5.0.4.deb
 			# 	notify-send 'GitKraken' 'have already installed!✔'
 			# 	;;
-
 			6)
 				#Install Visual Studio Code
 				echo "Installing Visual Studio Code"
 				snap install code --classic
 				notify-send 'Visual Studio Code' 'have already installed!✔'
 				;;
-
 			7)
 				#Android SDK
 				echo "Installing Android SDK"
@@ -78,7 +72,6 @@ else
 				notify-send 'Android SDK' 'have already installed!✔'
 				# file on /usr/lib/android-sdk
 				;;
-
 			# 8)
 			# 	#JDK 8
 			# 	echo "Installing JDK 8"
@@ -89,7 +82,7 @@ else
 			# 	rm -rf /usr/lib/jvm/jdk-8u221-linux-x64.tar.gz
 			# 	notify-send 'JDK 8' 'have already installed!✔'
 			# 	;;
-			
+		
 			# 9)
 			# 	#Appium
 			# 	echo "Installing Appium"
@@ -99,7 +92,6 @@ else
 			# 	notify-send 'Appium' 'have already installed!✔'
 			# 	# create to stsrt
 			# 	;;
-
 			10)
 				#Chrome
 				echo "Installing Google Chrome"
@@ -118,7 +110,6 @@ else
 				sudo systemctl enable docker
 				notify-send 'Docker' 'have already installed!✔'
 				;;
-				
 	    esac
 	done
 fi
