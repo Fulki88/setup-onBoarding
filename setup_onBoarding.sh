@@ -147,6 +147,7 @@ else
 				rm -rf ~/Downloads/appium.ls.ad
 				rm -rf ~/Downloads/appium.ls.ae
 				rm -rf ~/Downloads/appium.ls.af
+				sudo apt-get install -f
 				notify-send 'Appium' 'have already installed!✔'
 				;;
 	    esac
