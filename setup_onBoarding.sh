@@ -8,24 +8,21 @@ else
 	echo "Updating and Upgrading"
 	apt-get update && sudo apt-get upgrade -y
 
-	#Autoremove
-	echo "Updating and Upgrading"
-	apt autoremove -y
-
 	sudo apt-get install dialog
 	cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
 	# any option can be set to default to "on"
-	options=(1 "Build Essentials" on
-	         2 "Node.js" on
-			 3 "NPM" on
-	         4 "Git" on
-			 5 "Visual Studio Code" on
-			 6 "Android SDK" on
-			 7 "Google Chrome" on
-			 8 "Docker" on
-			 9 "GitKraken" on
-			10 "JDK 8" on
-			11 "Appium" on
+	options=(1 "Build Essentials" off
+	         2 "Node.js" off
+			 3 "NPM" off
+	         4 "Git" off
+			 5 "Visual Studio Code" off
+			 6 "Android SDK" off
+			 7 "Google Chrome" off
+			 8 "Docker" off
+			 9 "GitKraken" off
+			10 "JDK 8" off
+			11 "Appium" off
+			# 12 "Virtual Box" on
 			)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
@@ -82,9 +79,30 @@ else
 			8)
 				#Docker
 				echo "Installing Docker"
-				# sudo apt-get remove docker docker-engine docker.io
+				sudo apt-get remove docker docker-engine docker.io containerd runc
+				wget -d -c -O ~/browsers.json https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/configDocker/browsers.json
+				wget -d -c -O ~/docker-compose.yml https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/configDocker/docker-compose.yml
 				sudo apt install docker.io -y
-				sudo systemctl start docker
+				sudo apt-get install -y \
+    				apt-transport-https \
+    				ca-certificates \
+    				curl \
+    				gnupg-agent \
+    				software-properties-common
+				curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+				sudo add-apt-repository \
+   					"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   					$(lsb_release -cs) \
+   					stable"
+				sudo apt-get update
+				sudo apt-get install docker-ce docker-ce-cli containerd.io
+				# sudo groupadd docker
+				sudo usermod -aG docker $USER
+				newgrp docker 
+				# sudo systemctl start docker
+				sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+				sudo chmod +x /usr/local/bin/docker-compose
+				
 				sudo systemctl enable docker
 				notify-send 'Docker' 'have already installed!✔'
 				;;
@@ -99,6 +117,7 @@ else
 				rm -rf ~/Downloads/GitKraken-v5.0.4.ls.aa
 				rm -rf ~/Downloads/GitKraken-v5.0.4.ls.ab
 				rm -rf ~/Downloads/GitKraken-v5.0.4.ls.ac
+				sudo apt-get install -f -y
 				notify-send 'GitKraken' 'have already installed!✔'
 				;;
 			10)
@@ -147,9 +166,23 @@ else
 				rm -rf ~/Downloads/appium.ls.ad
 				rm -rf ~/Downloads/appium.ls.ae
 				rm -rf ~/Downloads/appium.ls.af
-				sudo apt-get install -f
+				sudo apt-get install -f -y
 				notify-send 'Appium' 'have already installed!✔'
 				;;
+			# 12)
+			# 	#Virtual Box
+			# 	echo "Installing Virtual Box"
+			# 	# sudo add-apt-repository multiverse
+			# 	# apt-get update
+			# 	# apt install virtualbox
+			# 	nano ~/.local/share/applications/androidstudio.desktop
+			# 	# echo "hiya"
+			# 	# > hiya2
+			# 	;;
 	    esac
 	done
+
+	#Autoremove
+	echo "Autoremove Actived"
+	apt autoremove -y
 fi
