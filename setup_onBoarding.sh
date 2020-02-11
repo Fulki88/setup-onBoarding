@@ -129,7 +129,7 @@ EOF
 				chmod a+rwx ~/browsers.json
 				chmod a+rwx ~/images
 				sudo apt-get update
-				sudo apt-get install \
+				sudo apt-get install -y \
     				apt-transport-https \
     				ca-certificates \
     				curl \
@@ -137,16 +137,12 @@ EOF
     				software-properties-common
 				curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 				sudo apt-get update
-				sudo apt-get install docker-ce docker-ce-cli containerd.io
+				sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 				sudo groupadd docker
 				sudo usermod -aG docker $SUDO_USER
-				echo ""
-				echo "write exit"
-				echo ""
-				newgrp docker 
+				sudo gpasswd -a $SUDO_USER docker
 				sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 				sudo chmod +x /usr/local/bin/docker-compose
-				# pull images
 				docker pull selenoid/vnc_chrome:78.0
 				notify-send 'Docker' 'have already installed!✔'
 				;;
