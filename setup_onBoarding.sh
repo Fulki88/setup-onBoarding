@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $EUID -ne 0 ]]; then
-   	echo "This script must be run as root" 
+   	echo "This script must be run as root"
    	exit 1
 else
 	#Update and Upgrade
@@ -87,32 +87,63 @@ else
 			8)
 				#Docker
 				echo "Installing Docker"
-				sudo apt-get remove -y docker docker-engine docker.io containerd runc
-				wget -d -c -O ~/browsers.json https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/configDocker/browsers.json
+				# echo "$SUDO_USER"
+				touch ~/browsers.json
+				cat << EOF > ~/browsers.json
+{
+  "firefox": {
+    "default": "70.0",
+    "versions": {
+      "70.0": {
+        "image": "selenoid/vnc_firefox:70.0",
+        "port": "4444",
+        "tmpfs": {
+          "/tmp": "size=1024m"
+        },
+        "volumes": [
+          "/home/${SUDO_USER}/images:/images"
+        ]
+      }
+    }
+  },
+  "chrome": {
+    "default": "78.0",
+    "versions": {
+      "78.0": {
+        "image": "selenoid/vnc_chrome:78.0",
+        "port": "4444",
+        "tmpfs": {
+          "/tmp": "size=1024m"
+        },
+        "volumes": [
+          "/home/${SUDO_USER}/images:/images"
+        ]
+      }
+    }
+  }
+}
+EOF
+				mkdir images
 				wget -d -c -O ~/docker-compose.yml https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/configDocker/docker-compose.yml
-				sudo apt install docker.io -y
-				sudo apt-get install -y \
+				chmod a+rwx ~/browsers.json
+				chmod a+rwx ~/docker-compose.yml
+				sudo apt-get update
+				sudo apt-get install \
     				apt-transport-https \
     				ca-certificates \
     				curl \
     				gnupg-agent \
     				software-properties-common
 				curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-				sudo add-apt-repository \
-   					"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   					$(lsb_release -cs) \
-   					stable"
 				sudo apt-get update
-				sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+				sudo apt-get install docker-ce docker-ce-cli containerd.io
 				sudo groupadd docker
-				echo "1"
-				sudo usermod -aG docker $username
-				newgrp docker
-				echo "2"
-				# sudo systemctl start docker
+				sudo usermod -aG docker $SUDO_USER
+				newgrp docker 
 				sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-				chmod a+rwx /usr/local/bin/docker-compose
-				sudo systemctl enable docker
+				sudo chmod +x /usr/local/bin/docker-compose
+				# pull images
+				docker pull selenoid/vnc_chrome:78.0
 				notify-send 'Docker' 'have already installed!✔'
 				;;
 			9)
