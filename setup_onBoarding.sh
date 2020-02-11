@@ -137,9 +137,14 @@ EOF
 				curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 				sudo apt-get update
 				sudo apt-get install docker-ce docker-ce-cli containerd.io
+				echo "1"
 				sudo groupadd docker
+				echo "2"
 				sudo usermod -aG docker $SUDO_USER
-				newgrp docker 
+				echo "3"
+				# newgrp docker 
+				# exit
+				echo "4" 
 				sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 				sudo chmod +x /usr/local/bin/docker-compose
 				# pull images
