@@ -106,7 +106,7 @@ else
 				sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 				sudo groupadd docker
 				echo "1"
-				sudo usermod -aG docker '$USER'
+				sudo usermod -aG docker $username
 				newgrp docker
 				echo "2"
 				# sudo systemctl start docker
