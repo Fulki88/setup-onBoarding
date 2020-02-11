@@ -11,18 +11,19 @@ else
 	sudo apt-get install dialog
 	cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
 	# any option can be set to default to "on"
-	options=(1 "Build Essentials" off
-	         2 "Node.js" off
-			 3 "NPM" off
-	         4 "Git" off
-			 5 "Visual Studio Code" off
-			 6 "Android SDK" off
-			 7 "Google Chrome" off
-			 8 "Docker" off
-			 9 "GitKraken" off
-			10 "JDK 8" off
-			11 "Appium" off
-			# 12 "Virtual Box" on
+	options=(1 "Build Essentials" on
+	         2 "Node.js" on
+			 3 "NPM" on
+	         4 "Git" on
+			 5 "Visual Studio Code" on
+			 6 "Android SDK" on
+			 7 "Google Chrome" on
+			 8 "Docker" on
+			 9 "GitKraken" on
+			10 "JDK 8" on
+			11 "Appium" on
+			12 "VPN" on
+			13 "Virtual Box" on
 			)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
@@ -64,8 +65,15 @@ else
 				#Android SDK
 				echo "Installing Android SDK"
 				apt install android-sdk -y
-				notify-send 'Android SDK' 'have already installed!✔'
 				# file on /usr/lib/android-sdk
+				cat <<- 'eof' >> ~/.bashrc
+					
+					export ANDROID_HOME="/usr/lib/android-sdk"
+					export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+					export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin
+					export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools
+				eof
+				notify-send 'Android SDK' 'have already installed!✔'
 				;;
 			7)
 				#Chrome
@@ -97,12 +105,11 @@ else
 				sudo apt-get update
 				sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 				sudo groupadd docker
-				sudo usermod -aG docker $USER
+				sudo usermod -aG docker "$USER"
 				newgrp docker 
 				# sudo systemctl start docker
 				sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-				sudo chmod +x /usr/local/bin/docker-compose
-				
+				chmod a+rwx /usr/local/bin/docker-compose
 				sudo systemctl enable docker
 				notify-send 'Docker' 'have already installed!✔'
 				;;
@@ -146,6 +153,11 @@ else
 				rm -rf ~/Downloads/jdk.ls.ag
 				rm -rf ~/Downloads/jdk.ls.ah
 				rm -rf ~/Downloads/jdk.ls.ai
+				cat <<- 'eof' >> ~/.bashrc
+					
+					export JAVA_HOME="/usr/lib/jvm/jdk1.8.0_221"
+					export PATH=$PATH:$JAVA_HOME/bin
+				eof
 				notify-send 'JDK 8' 'have already installed!✔'
 				;;
 			11)
@@ -159,7 +171,7 @@ else
 				wget -d -c -O ~/Downloads/appium.ls.ae https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/appium.ls.ae
 				wget -d -c -O ~/Downloads/appium.ls.af https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/appium.ls.af
 				cat ~/Downloads/appium.ls.?? > ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage
-				chmod +x ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage
+				chmod a+rwx ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage
 				rm -rf ~/Downloads/appium.ls.aa
 				rm -rf ~/Downloads/appium.ls.ab
 				rm -rf ~/Downloads/appium.ls.ac
@@ -169,20 +181,28 @@ else
 				sudo apt-get install -f -y
 				notify-send 'Appium' 'have already installed!✔'
 				;;
-			# 12)
-			# 	#Virtual Box
-			# 	echo "Installing Virtual Box"
-			# 	# sudo add-apt-repository multiverse
-			# 	# apt-get update
-			# 	# apt install virtualbox
-			# 	nano ~/.local/share/applications/androidstudio.desktop
-			# 	# echo "hiya"
-			# 	# > hiya2
-			# 	;;
+			12)
+				#VPN
+				echo "Installing VPN"
+				sudo apt install network-manager-l2tp
+				sudo apt-get update
+				sudo apt install network-manager-l2tp-gnome
+				sudo service network-manager restart
+				notify-send 'VPN' 'have already installed!✔'
+				;;
+			13)
+				#Virtual Box
+				echo "Installing Virtual Box"
+				sudo add-apt-repository multiverse
+				apt-get update
+				apt install virtualbox
+				;;
 	    esac
 	done
 
 	#Autoremove
+	echo ""
 	echo "Autoremove Actived"
 	apt autoremove -y
+	echo "Autoremove Done"
 fi
