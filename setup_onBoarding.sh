@@ -11,19 +11,19 @@ else
 	sudo apt-get install dialog
 	cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
 	# any option can be set to default to "on"
-	options=(1 "Build Essentials" on
-	         2 "Node.js" on
-			 3 "NPM" on
-	         4 "Git" on
-			 5 "Visual Studio Code" on
-			 6 "Android SDK" on
-			 7 "Google Chrome" on
+	options=(1 "Build Essentials" off
+	         2 "Node.js" off
+			 3 "NPM" off
+	         4 "Git" off
+			 5 "Visual Studio Code" off
+			 6 "Android SDK" off
+			 7 "Google Chrome" off
 			 8 "Docker" on
-			 9 "GitKraken" on
-			10 "JDK 8" on
-			11 "Appium" on
-			12 "VPN" on
-			13 "Virtual Box" on
+			 9 "GitKraken" off
+			10 "JDK 8" off
+			11 "Appium" off
+			12 "VPN" off
+			13 "Virtual Box" off
 			)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
@@ -87,7 +87,7 @@ else
 			8)
 				#Docker
 				echo "Installing Docker"
-				sudo apt-get remove docker docker-engine docker.io containerd runc
+				sudo apt-get remove -y docker docker-engine docker.io containerd runc
 				wget -d -c -O ~/browsers.json https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/configDocker/browsers.json
 				wget -d -c -O ~/docker-compose.yml https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/configDocker/docker-compose.yml
 				sudo apt install docker.io -y
@@ -105,8 +105,10 @@ else
 				sudo apt-get update
 				sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 				sudo groupadd docker
-				sudo usermod -aG docker "$USER"
-				newgrp docker 
+				echo "1"
+				sudo usermod -aG docker '$USER'
+				newgrp docker
+				echo "2"
 				# sudo systemctl start docker
 				sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 				chmod a+rwx /usr/local/bin/docker-compose
