@@ -144,6 +144,7 @@ EOF
 				sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 				sudo chmod +x /usr/local/bin/docker-compose
 				docker pull selenoid/vnc_chrome:78.0
+				newgrp docker
 				notify-send 'Docker' 'have already installed!✔'
 				;;
 			9)
@@ -217,9 +218,9 @@ EOF
 			12)
 				#VPN
 				echo "Installing VPN"
-				sudo apt install network-manager-l2tp
+				sudo apt install -y network-manager-l2tp
 				sudo apt-get update
-				sudo apt install network-manager-l2tp-gnome
+				sudo apt install -y network-manager-l2tp-gnome
 				sudo service network-manager restart
 				notify-send 'VPN' 'have already installed!✔'
 				;;
@@ -228,7 +229,7 @@ EOF
 				echo "Installing Virtual Box"
 				sudo add-apt-repository multiverse
 				apt-get update
-				apt install virtualbox
+				apt install virtualbox -y
 				;;
 	    esac
 	done
