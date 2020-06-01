@@ -242,6 +242,7 @@ EOF
 				rm -rf ~/Downloads/genymotion-3.1.0.ab
 				chmod +x ~/Downloads/genymotion-3.1.0-linux_x64.bin
 				./Downloads/genymotion-3.1.0-linux_x64.bin -d ./Documents/ -y
+				rm -rf ~/Downloads/genymotion-3.1.0-linux_x64.bin
 				notify-send 'Genymotion' 'have already installed!✔'
 				;;
 	    esac
