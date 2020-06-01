@@ -24,6 +24,7 @@ else
 			11 "Appium" on
 			12 "VPN" on
 			13 "Virtual Box" on
+			14 "Genymotion (Need Install Virtual Box First)" on
 			)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
@@ -230,6 +231,18 @@ EOF
 				sudo add-apt-repository multiverse
 				apt-get update
 				apt install virtualbox -y
+				;;
+			14)
+				#Genymotion
+				echo "Installing Genymotion"
+				wget -d -c -O ~/Downloads/genymotion-3.1.0.aa https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/genymotion-3.1.0.aa
+				wget -d -c -O ~/Downloads/genymotion-3.1.0.ab https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/genymotion-3.1.0.ab
+				cat ~/Downloads/genymotion-3.1.0.?? > ~/Downloads/genymotion-3.1.0-linux_x64.bin
+				rm -rf ~/Downloads/genymotion-3.1.0.aa
+				rm -rf ~/Downloads/genymotion-3.1.0.ab
+				chmod +x ~/Downloads/genymotion-3.1.0-linux_x64.bin
+				./Downloads/genymotion-3.1.0-linux_x64.bin -d ./Documents/ -y
+				notify-send 'Genymotion' 'have already installed!✔'
 				;;
 	    esac
 	done
