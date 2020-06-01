@@ -23,7 +23,7 @@ else
 			10 "JDK 8" on
 			11 "Appium" on
 			12 "VPN" on
-			13 "Virtual Box" on
+			13 "Virtual Boxi" on
 			14 "Genymotion (Need Install Virtual Box First)" on
 			)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
