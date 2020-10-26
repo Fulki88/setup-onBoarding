@@ -23,7 +23,7 @@ else
 			10 "JDK 8" on
 			11 "Appium" on
 			12 "VPN" on
-			13 "Virtual Boxi" on
+			13 "Virtual Box" on
 			14 "Genymotion (Need Install Virtual Box First)" on
 			)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -205,8 +205,8 @@ EOF
 				wget -d -c -O ~/Downloads/appium.ls.ad https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/appium.ls.ad
 				wget -d -c -O ~/Downloads/appium.ls.ae https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/appium.ls.ae
 				wget -d -c -O ~/Downloads/appium.ls.af https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/appium.ls.af
-				cat ~/Downloads/appium.ls.?? > ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage
-				chmod a+rwx ~/Documents/AppiumApps/Appium-linux-1.15.1.AppImage
+				cat ~/Downloads/appium.ls.?? > ~/Documents/AppiumApps/Appium-linux-1.18.0-2.AppImage
+				chmod a+rwx ~/Documents/AppiumApps/Appium-linux-1.18.0-2.AppImage
 				rm -rf ~/Downloads/appium.ls.aa
 				rm -rf ~/Downloads/appium.ls.ab
 				rm -rf ~/Downloads/appium.ls.ac
@@ -235,13 +235,13 @@ EOF
 			14)
 				#Genymotion
 				echo "Installing Genymotion"
-				wget -d -c -O ~/Downloads/genymotion-3.1.0.aa https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/genymotion-3.1.0.aa
-				wget -d -c -O ~/Downloads/genymotion-3.1.0.ab https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/genymotion-3.1.0.ab
-				cat ~/Downloads/genymotion-3.1.0.?? > ~/Downloads/genymotion-3.1.0-linux_x64.bin
-				rm -rf ~/Downloads/genymotion-3.1.0.aa
-				rm -rf ~/Downloads/genymotion-3.1.0.ab
-				chmod +x ~/Downloads/genymotion-3.1.0-linux_x64.bin
-				./Downloads/genymotion-3.1.0-linux_x64.bin -d ./Documents/ -y
+				wget -d -c -O ~/Downloads/genymotion-3.1.2.ls.aa https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/genymotion-3.1.2.ls.aa
+				wget -d -c -O ~/Downloads/genymotion-3.1.2.ls.ab https://raw.githubusercontent.com/Fulki88/setup-onBoardingQAAI/master/apps/genymotion-3.1.2.ls.ab
+				cat ~/Downloads/genymotion-3.1.2.ls.?? > ~/Downloads/genymotion-3.1.2-linux_x64.bin
+				rm -rf ~/Downloads/genymotion-3.1.2.ls.aa
+				rm -rf ~/Downloads/genymotion-3.1.2.ls.ab
+				chmod +x ~/Downloads/genymotion-3.1.2-linux_x64.bin
+				./Downloads/genymotion-3.1.2-linux_x64.bin -d ./Documents/ -y
 				rm -rf ~/Downloads/genymotion-3.1.0-linux_x64.bin
 				notify-send 'Genymotion' 'have already installed!✔'
 				;;
